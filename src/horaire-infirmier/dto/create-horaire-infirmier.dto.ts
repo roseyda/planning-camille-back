@@ -1,9 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { CreatePlanningDto } from './create-planning.dto';
 
-export class PlanningDto extends CreatePlanningDto {
+export class CreateHoraireInfirmierDto {
   @ApiProperty()
   @IsNotEmpty()
-  id: string;
+  name: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  color: string;
 }

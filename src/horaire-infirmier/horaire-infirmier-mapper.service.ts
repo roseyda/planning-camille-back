@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { CreateHoraireInfirmierDto } from './dto/create-horaire-infirmier.dto';
 import { HoraireInfirmierDto } from './dto/horaire-infirmier.dto';
 import { HoraireInfirmier } from './entities/horaire-infirmier.entity';
 
 @Injectable()
 export class HoraireInfirmierMapperService {
-  public dtoToEntity(dto: HoraireInfirmierDto): HoraireInfirmier {
+  public dtoToEntity(dto: HoraireInfirmierDto | CreateHoraireInfirmierDto): HoraireInfirmier {
     return dto
       ? ({
-          _id: dto.id,
+          _id: (dto as HoraireInfirmierDto).id,
           name: dto.name,
           color: dto.color,
         } as HoraireInfirmier)

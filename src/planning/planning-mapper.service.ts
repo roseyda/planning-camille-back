@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { CreatePlanningDto } from './dto/create-planning.dto';
 import { PlanningDto } from './dto/planning.dto';
 import { Planning } from './entities/planning.entity';
 
 @Injectable()
 export class PlanningMapperService {
-  public dtoToEntity(dto: PlanningDto): Planning {
-    return dto
+  public dtoToEntity(dto: PlanningDto | CreatePlanningDto): Planning {
+    return (dto as PlanningDto)
       ? ({
-          _id: dto.id,
+          _id: (dto as PlanningDto).id,
           date: new Date(dto.date),
           horaire: dto.horaire,
         } as Planning)

@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { ApiBody, ApiQuery } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiQuery } from '@nestjs/swagger';
+import { CreatePlanningDto } from './dto/create-planning.dto';
 import { PlanningDto } from './dto/planning.dto';
 import { PlanningMapperService } from './planning-mapper.service';
 import { PlanningService } from './planning.service';
@@ -10,8 +11,9 @@ export class PlanningController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @ApiBody({ type: PlanningDto })
-  async create(@Body() dto: PlanningDto): Promise<PlanningDto> {
+  @ApiBody({ type: CreatePlanningDto })
+  @ApiCreatedResponse({ type: PlanningDto })
+  async create(@Body() dto: CreatePlanningDto): Promise<PlanningDto> {
     return this.mapper.entityToDto(await this.service.create(this.mapper.dtoToEntity(dto)));
   }
 
@@ -26,17 +28,20 @@ export class PlanningController {
     required: false,
     type: String,
   })
+  @ApiOkResponse({ type: PlanningDto, isArray: true })
   async findByDate(@Query('start') start: string, @Query('end') end: string): Promise<PlanningDto[]> {
     return this.mapper.entitiesToDtos(await this.service.findByDate(start, end));
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: PlanningDto })
   async findOne(@Param('id') id: string): Promise<PlanningDto> {
     return this.mapper.entityToDto(await this.service.findOne(id));
   }
 
   @Put(':id')
   @ApiBody({ type: PlanningDto })
+  @ApiOkResponse({ type: PlanningDto })
   async update(@Param('id') id: string, @Body() dto: PlanningDto): Promise<PlanningDto> {
     return this.mapper.entityToDto(await this.service.update(id, this.mapper.dtoToEntity(dto)));
   }

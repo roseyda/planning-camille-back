@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import { CreateHoraireInfirmierDto } from './dto/create-horaire-infirmier.dto';
 import { HoraireInfirmierDto } from './dto/horaire-infirmier.dto';
 import { HoraireInfirmierMapperService } from './horaire-infirmier-mapper.service';
 import { HoraireInfirmierService } from './horaire-infirmier.service';
@@ -13,23 +14,27 @@ export class HoraireInfirmierController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @ApiBody({ type: HoraireInfirmierDto })
-  async create(@Body() dto: HoraireInfirmierDto): Promise<HoraireInfirmierDto> {
+  @ApiBody({ type: CreateHoraireInfirmierDto })
+  @ApiCreatedResponse({ type: HoraireInfirmierDto })
+  async create(@Body() dto: CreateHoraireInfirmierDto): Promise<HoraireInfirmierDto> {
     return this.mapper.entityToDto(await this.service.create(this.mapper.dtoToEntity(dto)));
   }
 
   @Get()
+  @ApiOkResponse({ type: HoraireInfirmierDto, isArray: true })
   async findAll(): Promise<HoraireInfirmierDto[]> {
     return this.mapper.entitiesToDtos(await this.service.findAll());
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: HoraireInfirmierDto })
   async findOne(@Param('id') id: string): Promise<HoraireInfirmierDto> {
     return this.mapper.entityToDto(await this.service.findOne(id));
   }
 
   @Put(':id')
   @ApiBody({ type: HoraireInfirmierDto })
+  @ApiOkResponse({ type: HoraireInfirmierDto })
   async update(@Param('id') id: string, @Body() dto: HoraireInfirmierDto): Promise<HoraireInfirmierDto> {
     return this.mapper.entityToDto(await this.service.update(id, this.mapper.dtoToEntity(dto)));
   }
