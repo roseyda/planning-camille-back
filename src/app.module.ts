@@ -13,11 +13,11 @@ import { PlanningModule } from './planning/planning.module';
     HoraireInfirmierModule,
     RouterModule.register([
       {
-        path: '/api/v1/planning',
+        path: '/api/v1',
         module: PlanningModule,
       },
       {
-        path: '/api/v1/horaire-infirmier',
+        path: '/api/v1',
         module: HoraireInfirmierModule,
       },
     ]),

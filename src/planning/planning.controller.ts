@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
-import { FindPlaningParams } from './dto/findPlanningParam.model';
+import { ApiBody, ApiQuery } from '@nestjs/swagger';
 import { PlanningDto } from './dto/planning.dto';
 import { PlanningMapperService } from './planning-mapper.service';
 import { PlanningService } from './planning.service';
@@ -17,7 +16,17 @@ export class PlanningController {
   }
 
   @Get()
-  async findByDate(@Query() { start, end }: FindPlaningParams): Promise<PlanningDto[]> {
+  @ApiQuery({
+    name: 'start',
+    required: false,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'end',
+    required: false,
+    type: String,
+  })
+  async findByDate(@Query('start') start: string, @Query('end') end: string): Promise<PlanningDto[]> {
     return this.mapper.entitiesToDtos(await this.service.findByDate(start, end));
   }
 
