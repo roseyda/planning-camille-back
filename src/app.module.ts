@@ -4,8 +4,8 @@ import { RouterModule } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { HoraireInfirmierModule } from './horaire-infirmier/horaire-infirmier.module';
-import { PlanningModule } from './planning/planning.module';
 import { LoginModule } from './login/login.module';
+import { PlanningModule } from './planning/planning.module';
 
 @Module({
   imports: [
@@ -21,6 +21,10 @@ import { LoginModule } from './login/login.module';
       {
         path: '/api/v1',
         module: HoraireInfirmierModule,
+      },
+      {
+        path: '/api/v1',
+        module: LoginModule,
       },
     ]),
     AuthModule,
