@@ -1,11 +1,26 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiQuery } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiOkResponse, ApiQuery } from '@nestjs/swagger';
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { CreatePlanningDto } from './dto/create-planning.dto';
 import { PlanningDto } from './dto/planning.dto';
 import { PlanningMapperService } from './planning-mapper.service';
 import { PlanningService } from './planning.service';
 
 @Controller('planning')
+@ApiBearerAuth('JWT-auth')
+@UseGuards(JwtAuthGuard)
 export class PlanningController {
   constructor(private readonly service: PlanningService, private readonly mapper: PlanningMapperService) {}
 

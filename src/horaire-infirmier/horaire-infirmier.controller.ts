@@ -1,11 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
-import { ApiBody, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { CreateHoraireInfirmierDto } from './dto/create-horaire-infirmier.dto';
 import { HoraireInfirmierDto } from './dto/horaire-infirmier.dto';
 import { HoraireInfirmierMapperService } from './horaire-infirmier-mapper.service';
 import { HoraireInfirmierService } from './horaire-infirmier.service';
 
 @Controller('horaire-infirmier')
+@ApiBearerAuth('JWT-auth')
+@UseGuards(JwtAuthGuard)
 export class HoraireInfirmierController {
   constructor(
     private readonly service: HoraireInfirmierService,
