@@ -7,6 +7,8 @@ export class HoraireInfirmier {
   name: string;
   @Prop()
   color: string;
+  @Prop()
+  enabled: boolean;
 }
 
 export const HoraireInfirmierSchema = SchemaFactory.createForClass(HoraireInfirmier);

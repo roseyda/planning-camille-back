@@ -24,6 +24,18 @@ import { PlanningService } from './planning.service';
 export class PlanningController {
   constructor(private readonly service: PlanningService, private readonly mapper: PlanningMapperService) {}
 
+  // @Post()
+  // @HttpCode(HttpStatus.CREATED)
+  // @ApiBody({ type: CreatePlanningDto, isArray: true })
+  // @ApiCreatedResponse({ type: PlanningDto, isArray: true })
+  // async create(@Body() dtos: (CreatePlanningDto & { name: string })[]): Promise<PlanningDto[]> {
+  //   return await Promise.all(
+  //     dtos.map(async (dto) =>
+  //       this.mapper.entityToDto(await this.service.create(this.mapper.dtoToEntity({ ...dto, horaire: dto.name })))
+  //     )
+  //   );
+  // }
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiBody({ type: CreatePlanningDto })

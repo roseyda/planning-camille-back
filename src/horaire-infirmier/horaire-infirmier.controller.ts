@@ -15,6 +15,16 @@ export class HoraireInfirmierController {
     private readonly mapper: HoraireInfirmierMapperService
   ) {}
 
+  // @Post()
+  // @HttpCode(HttpStatus.CREATED)
+  // @ApiBody({ type: CreateHoraireInfirmierDto, isArray: true })
+  // @ApiCreatedResponse({ type: HoraireInfirmierDto, isArray: true })
+  // async create(@Body() dtos: CreateHoraireInfirmierDto[]): Promise<HoraireInfirmierDto[]> {
+  //   return await Promise.all(
+  //     dtos.map(async (dto) => this.mapper.entityToDto(await this.service.create(this.mapper.dtoToEntity(dto))))
+  //   );
+  // }
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiBody({ type: CreateHoraireInfirmierDto })

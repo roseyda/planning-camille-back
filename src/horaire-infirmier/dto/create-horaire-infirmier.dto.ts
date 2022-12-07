@@ -9,4 +9,7 @@ export class CreateHoraireInfirmierDto {
   @ApiProperty()
   @IsNotEmpty()
   color: string;
+
+  @ApiProperty()
+  enabled: boolean;
 }

@@ -6,9 +6,9 @@ import { Planning } from './entities/planning.entity';
 @Injectable()
 export class PlanningMapperService {
   public dtoToEntity(dto: PlanningDto | CreatePlanningDto): Planning {
-    return (dto as PlanningDto)
+    return dto
       ? ({
-          _id: (dto as PlanningDto).id,
+          _id: (dto as PlanningDto)?.id,
           date: new Date(dto.date),
           horaire: dto.horaire,
         } as Planning)

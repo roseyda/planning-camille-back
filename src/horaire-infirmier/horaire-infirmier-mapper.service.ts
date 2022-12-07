@@ -8,9 +8,10 @@ export class HoraireInfirmierMapperService {
   public dtoToEntity(dto: HoraireInfirmierDto | CreateHoraireInfirmierDto): HoraireInfirmier {
     return dto
       ? ({
-          _id: (dto as HoraireInfirmierDto).id,
+          _id: (dto as HoraireInfirmierDto)?.id,
           name: dto.name,
           color: dto.color,
+          enabled: dto.enabled,
         } as HoraireInfirmier)
       : undefined;
   }
@@ -25,6 +26,7 @@ export class HoraireInfirmierMapperService {
           id: entity._id,
           name: entity.name,
           color: entity.color,
+          enabled: entity.enabled,
         } as HoraireInfirmierDto)
       : undefined;
   }
