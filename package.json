@@ -1,12 +1,12 @@
 {
   "name": "planning-camille-back",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "scripts": {
     "prebuild": "rimraf dist",
