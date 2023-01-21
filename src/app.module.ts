@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { HoraireInfirmierModule } from './horaire-infirmier/horaire-infirmier.module';
 import { LoginModule } from './login/login.module';
 import { PlanningModule } from './planning/planning.module';
+import { PublicModule } from './public/public.module';
 
 @Module({
   imports: [
@@ -26,9 +27,14 @@ import { PlanningModule } from './planning/planning.module';
         path: '/api/v1',
         module: LoginModule,
       },
+      {
+        path: '/api/v1',
+        module: PublicModule,
+      },
     ]),
     AuthModule,
     LoginModule,
+    PublicModule,
   ],
 })
 export class AppModule {}
