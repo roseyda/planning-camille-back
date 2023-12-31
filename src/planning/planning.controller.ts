@@ -22,7 +22,10 @@ import { PlanningService } from './planning.service';
 @ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
 export class PlanningController {
-  constructor(private readonly service: PlanningService, private readonly mapper: PlanningMapperService) {}
+  constructor(
+    private readonly service: PlanningService,
+    private readonly mapper: PlanningMapperService
+  ) {}
 
   // @Post()
   // @HttpCode(HttpStatus.CREATED)
